@@ -1,0 +1,14 @@
+D:\FOOTPLAN\netcore\FoodPlan.DB\bin\Debug\netcoreapp2.2\FoodPlan.DB.deps.json
+D:\FOOTPLAN\netcore\FoodPlan.DB\bin\Debug\netcoreapp2.2\FoodPlan.DB.dll
+D:\FOOTPLAN\netcore\FoodPlan.DB\obj\Debug\netcoreapp2.2\FoodPlan.DB.csprojAssemblyReference.cache
+D:\FOOTPLAN\netcore\FoodPlan.DB\obj\Debug\netcoreapp2.2\FoodPlan.DB.csproj.CoreCompileInputs.cache
+D:\FOOTPLAN\netcore\FoodPlan.DB\obj\Debug\netcoreapp2.2\FoodPlan.DB.AssemblyInfoInputs.cache
+D:\FOOTPLAN\netcore\FoodPlan.DB\obj\Debug\netcoreapp2.2\FoodPlan.DB.AssemblyInfo.cs
+D:\FOOTPLAN\netcore\FoodPlan.DB\bin\Debug\netcoreapp2.2\FoodPlan.DB.pdb
+D:\FOOTPLAN\netcore\FoodPlan.DB\bin\Debug\netcoreapp2.2\FoodPlan.Core.dll
+D:\FOOTPLAN\netcore\FoodPlan.DB\bin\Debug\netcoreapp2.2\Microsoft.Extensions.Options.dll
+D:\FOOTPLAN\netcore\FoodPlan.DB\bin\Debug\netcoreapp2.2\FoodPlan.Core.pdb
+D:\FOOTPLAN\netcore\FoodPlan.DB\bin\Debug\netcoreapp2.2\Microsoft.Extensions.Options.xml
+D:\FOOTPLAN\netcore\FoodPlan.DB\obj\Debug\netcoreapp2.2\FoodPlan.DB.csproj.CopyComplete
+D:\FOOTPLAN\netcore\FoodPlan.DB\obj\Debug\netcoreapp2.2\FoodPlan.DB.dll
+D:\FOOTPLAN\netcore\FoodPlan.DB\obj\Debug\netcoreapp2.2\FoodPlan.DB.pdb

@@ -1,0 +1,9 @@
+D:\FOOTPLAN\netcore\FoodPlan.Core\bin\Debug\netcoreapp2.2\FoodPlan.Core.deps.json
+D:\FOOTPLAN\netcore\FoodPlan.Core\bin\Debug\netcoreapp2.2\FoodPlan.Core.dll
+D:\FOOTPLAN\netcore\FoodPlan.Core\bin\Debug\netcoreapp2.2\FoodPlan.Core.pdb
+D:\FOOTPLAN\netcore\FoodPlan.Core\obj\Debug\netcoreapp2.2\FoodPlan.Core.csproj.CoreCompileInputs.cache
+D:\FOOTPLAN\netcore\FoodPlan.Core\obj\Debug\netcoreapp2.2\FoodPlan.Core.AssemblyInfoInputs.cache
+D:\FOOTPLAN\netcore\FoodPlan.Core\obj\Debug\netcoreapp2.2\FoodPlan.Core.AssemblyInfo.cs
+D:\FOOTPLAN\netcore\FoodPlan.Core\obj\Debug\netcoreapp2.2\FoodPlan.Core.dll
+D:\FOOTPLAN\netcore\FoodPlan.Core\obj\Debug\netcoreapp2.2\FoodPlan.Core.pdb
+D:\FOOTPLAN\netcore\FoodPlan.Core\obj\Debug\netcoreapp2.2\FoodPlan.Core.csprojAssemblyReference.cache
