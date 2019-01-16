@@ -1,8 +1,5 @@
-﻿using MongoDB.Bson.Serialization;
-using MongoDB.Bson.Serialization.Serializers;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace FoodPlan.Core.Entity
 {
@@ -11,7 +8,7 @@ namespace FoodPlan.Core.Entity
         /// <summary>
         /// Id
         /// </summary>
-        public Guid Id { get; set; }
+        public Guid _id { get; set; }
         /// <summary>
         /// 食材名称
         /// </summary>

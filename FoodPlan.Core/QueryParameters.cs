@@ -13,9 +13,9 @@ namespace FoodPlan.Core
         public virtual int PageIndex
         {
             get => _pageIndex;
-            set => _pageIndex = value >= 0 ? value : 0;
+            set => _pageIndex = value >= 1 ? value : 1;
         }
-        public virtual int PagSize
+        public virtual int PageSize
         {
             get => _pageSize;
             set => _pageSize = value >= 1 ? value : 100;

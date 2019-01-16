@@ -6,6 +6,6 @@ namespace FoodPlan.Core.Entity
 {
     public interface IEntityBase
     {
-        Guid Id { get; set; }
+        Guid _id { get; set; }
     }
 }

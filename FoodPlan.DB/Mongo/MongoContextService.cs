@@ -71,7 +71,7 @@ namespace FoodPlan.DB.Mongo
             BsonClassMap.RegisterClassMap((BsonClassMap<Core.Entity.Single> cm) =>
             {
                 cm.AutoMap();
-                cm.MapIdMember(x => x.Id).SetIdGenerator(CombGuidGenerator.Instance).SetElementName("id"); // 使用Guid作为文档id
+                cm.MapIdMember(x => x._id).SetIdGenerator(CombGuidGenerator.Instance).SetElementName("id"); // 使用Guid作为文档id
             });
         }
         // <summary>
@@ -86,12 +86,9 @@ namespace FoodPlan.DB.Mongo
             };
             var builder = Builders<T>.IndexKeys;
             IndexKeysDefinition<T> nameKey = builder.Ascending(d => d.Name);
-            IndexKeysDefinition<T> modifyNoKey = builder.Descending(d => d.ModifyNo);
-
             var ie = new List<CreateIndexModel<T>>
             {
                 new CreateIndexModel<T>(nameKey, unique),
-                new CreateIndexModel<T>(modifyNoKey),
             };
             context.Indexes.CreateManyAsync(ie);
         }

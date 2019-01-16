@@ -67,7 +67,7 @@ namespace FoodPlan.Core.Service
         public TypeHelperReturnData<string> Orday<T>(string strs)
         {
             if (IsNull(strs))
-                return new TypeHelperReturnData<string>(){ Success = true };
+                return new TypeHelperReturnData<string>(){ Success = false };
 
             var sbstr = new StringBuilder();
             var fieldsAfterSplit = strs.Split(',');

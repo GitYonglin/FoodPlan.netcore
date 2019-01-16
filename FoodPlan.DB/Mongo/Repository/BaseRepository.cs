@@ -50,33 +50,23 @@ namespace FoodPlan.DB.Mongo.Repository
 
         public async Task<IEnumerable<T>> AllAsync(QueryParameters queryParameters)
         {
-            //SortDefinition<T> sort = "{Unit: 1, Min: -1}";
-            ////ProjectionDefinition<T, T> projection = "{ Id: 1, Unit: 1 }";
-            ////var projection = Builders<T>.Projection.Include("X").Include("Y").Exclude("Id");
-            //var projection = Builders<T>.Projection.Expression(x => new { X = x.Id});
-            //return await _context.Find(_ => true)
-            //        .Sort(sort)
-            //        .Skip(queryParameters.PageIndex * queryParameters.PagSize)
-            //        .Limit(queryParameters.PagSize).ToListAsync();
             return await _context.Find(_ => true)
-                    .SortBy(s => s.Id)
-                    .Skip(queryParameters.PageIndex * queryParameters.PagSize)
-                    .Limit(queryParameters.PagSize).ToListAsync();
+                    .SortBy(s => s._id)
+                    .Skip(queryParameters.PageIndex * queryParameters.PageSize)
+                    .Limit(queryParameters.PageSize).ToListAsync();
         }
 
         public async Task<DeleteResult> DeleteAsync(Guid id)
         {
-            return await _context.DeleteOneAsync(filter => filter.Id == id);
+            return await _context.DeleteOneAsync(filter => filter._id == id);
         }
 
         public async Task<T> GetOneAsync(Guid id)
         {
+            
             try
             {
-                //var projection = Builders<T>.Projection.Exclude("_id");
-                //var document = _context.Find(f => f.Id == id).Project(projection).First();
-                //var documenta = await _context.Find(f => f.Id == id).Project(projection).FirstAsync();
-                return await _context.Find(f => f.Id == id).FirstAsync();
+                return await _context.Find(filter => filter._id == id).FirstAsync();
             }
             catch (Exception)
             {
@@ -108,8 +98,8 @@ namespace FoodPlan.DB.Mongo.Repository
                 await _context.Find(_ => true)
                         .Sort(sort)
                         .Project(projection)
-                        .Skip(queryParameters.PageIndex * queryParameters.PagSize)
-                        .Limit(queryParameters.PagSize).ForEachAsync(f =>
+                        .Skip((queryParameters.PageIndex - 1) * queryParameters.PageSize)
+                        .Limit(queryParameters.PageSize).ForEachAsync(f =>
                         {
                             list.Add(BsonSerializer.Deserialize<object>(f));
                         });

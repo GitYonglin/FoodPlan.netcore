@@ -6,7 +6,7 @@ namespace FoodPlan.Core.Entity
 {
     public class ShoppingCar: IEntityBase
     {
-        public Guid Id { get; set; }
+        public Guid _id { get; set; }
         /// <summary>
         /// 购物车商品状态 true=套餐商品 false=单品
         /// </summary>

@@ -6,7 +6,7 @@ namespace FoodPlan.Core.Entity
 {
     public class SetMeals: IEntityBase
     {
-        public Guid Id { get; set; }
+        public Guid _id { get; set; }
         /// <summary>
         /// 套餐名称
         /// </summary>
