@@ -6,11 +6,12 @@ using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Linq;
-using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using FoodPlan.DB.Modules;
+using MongoDB.Bson;
+using FoodPlan.DB.Service;
 
+// ReSharper disable once IdentifierTypo
 namespace FoodPlan.DB.Mongo.Repository
 {
     public abstract class BaseRepository<T> : IBaseRepository<T> where T : IEntityBase
@@ -18,39 +19,42 @@ namespace FoodPlan.DB.Mongo.Repository
         /// <summary>
         /// 文档
         /// </summary>
-        protected IMongoCollection<T> _context;
+        protected IMongoCollection<T> Context;
         /// <summary>
         /// 数据库
         /// </summary>
-        protected readonly MongoContextService _datebase;
+        // ReSharper disable once IdentifierTypo
+        protected readonly MongoContextService Datebase;
         /// <summary>
         /// 构成函数
         /// </summary>
         /// <param name="dBSettings">数据库连接字符串</param>
         /// 注意：IOptions 是通过依赖注入到 .net core 应用时获取到的
-        public BaseRepository(IOptions<DBSettings> dBSettings)
+        protected BaseRepository(IOptions<DBSettings> dBSettings)
         {
-            _datebase = new MongoContextService(dBSettings);
+            Datebase = new MongoContextService(dBSettings);
         }
   
         public async Task<ReturnData<T>> AddAsync(T data)
         {
+            var r = new ReturnData<T>();
             try
             {
-                await _context.InsertOneAsync(data);
-                return new ReturnData<T>() { Data = data, Success = true };
+                await Context.InsertOneAsync(data);
+                r.Data = data;
+                r.Success = true;
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                return new ReturnData<T>() { Success = false, Error = e.Message };
-                throw;
+                r.Error = e.Message;
             }
+
+            return r;
         }
 
         public async Task<IEnumerable<T>> AllAsync(QueryParameters queryParameters)
         {
-            return await _context.Find(_ => true)
+            return await Context.Find(_ => true)
                     .SortBy(s => s._id)
                     .Skip(queryParameters.PageIndex * queryParameters.PageSize)
                     .Limit(queryParameters.PageSize).ToListAsync();
@@ -58,32 +62,45 @@ namespace FoodPlan.DB.Mongo.Repository
 
         public async Task<DeleteResult> DeleteAsync(Guid id)
         {
-            return await _context.DeleteOneAsync(filter => filter._id == id);
+            return await Context.DeleteOneAsync(filter => filter._id == id);
         }
 
-        public async Task<T> GetOneAsync(Guid id)
+        public async Task<ReturnData<T>> GetOneAsync(Guid id)
         {
-            
             try
             {
-                return await _context.Find(filter => filter._id == id).FirstAsync();
+                var d =await Context.Find(filter => filter._id == id).FirstAsync();
+                return new ReturnData<T>() { Data = d, Success = true };
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return default(T);
+                return new ReturnData<T>() { Success = false, Error = e.Message };
             }
         }
 
-        public Task UpdateOneAsync(T addData)
+        public async Task<ReturnData<T>> UpdateOneAsync(T data)
         {
-            throw new NotImplementedException();
+            var r = new ReturnData<T>();
+            try
+            {
+                FilterDefinition<T> filter = new BsonDocument("_id", data._id);
+
+                await Context.ReplaceOneAsync(filter, data);
+                r = await GetOneAsync(data._id);
+            }
+            catch (Exception e)
+            {
+                r.Error = e.Message;
+            }
+
+            return r;
         }
 
         public async Task<PageReturnData<IEnumerable<object>>> GetAsync(QueryParameters queryParameters)
         {
             try
             {
-                var count = await _context.CountDocumentsAsync(_ => true);
+                var count = await Context.CountDocumentsAsync(_ => true);
                 ProjectionDefinition<T> projection = "{}";
                 SortDefinition<T> sort = "{Id: 1}";
                 if (queryParameters.Fields != null)
@@ -95,7 +112,7 @@ namespace FoodPlan.DB.Mongo.Repository
                     sort = queryParameters.OrdayOk;
                 }
                 var list = new List<object>();
-                await _context.Find(_ => true)
+                await Context.Find(_ => true)
                         .Sort(sort)
                         .Project(projection)
                         .Skip((queryParameters.PageIndex - 1) * queryParameters.PageSize)
@@ -115,6 +132,33 @@ namespace FoodPlan.DB.Mongo.Repository
                     Error = e.Message,
                 };
             }
+        }
+
+        public async Task<ReturnData<T>> UpdatePropertyAsync(Guid id, UpDateModle date)
+        {
+            var r = new ReturnData<T>();
+            try
+            {
+                //UpdateDefinition<T> update = "{ $set: { x: 1, y: 3 }, $inc: { z: 1 } }";
+                FilterDefinition<T> filter = new BsonDocument("_id", id);
+                var updateStr = "{$set:" + date.Set + ", $inc:" + date.Inc + "}";
+
+                if (date.Set != null)
+                    updateStr = "{$set:" + date.Set + "}";
+
+                if (date.Inc != null)
+                    updateStr = "{$inc:" + date.Inc + "}";
+
+                UpdateDefinition<T> update = updateStr;
+                await Context.UpdateOneAsync(filter, update);
+                r = await GetOneAsync(id);
+
+            }
+            catch (Exception e)
+            {
+                r.Error = e.Message;
+            }
+            return r;
         }
     }
 }

@@ -7,13 +7,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+// ReSharper disable once IdentifierTypo
 namespace FoodPlan.DB.Mongo.Repository
 {
     public class SinglesRepository: BaseRepository<Core.Entity.Single>, ISinglesRepository
     {
         public SinglesRepository(IOptions<DBSettings> dBSettings) : base(dBSettings)
         {
-            _context = _datebase.ContactSingles;
+            Context = Datebase.ContactSingles;
         }
     }
 }

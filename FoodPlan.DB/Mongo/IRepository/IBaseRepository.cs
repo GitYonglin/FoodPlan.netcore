@@ -35,19 +35,28 @@ namespace FoodPlan.DB.Mongo.IRepository
         /// </summary>
         /// <param name="id">数据Guid</param>
         /// <returns></returns>
-        Task<T> GetOneAsync(Guid id);
+        Task<ReturnData<T>> GetOneAsync(Guid id);
         /// <summary>
         /// 删除一条数据
         /// </summary>
         /// <param name="id">Guid</param>
         /// <returns></returns>
         Task<DeleteResult> DeleteAsync(Guid id);
+
         /// <summary>
         /// 修改一条完整的数据
         /// </summary>
         /// <param name="addData">修改的数据</param>
         /// <returns></returns>
-        Task UpdateOneAsync(T addData);
+        Task<ReturnData<T>> UpdateOneAsync(T addData);
+
+        /// <summary>
+        /// 修改一条完整的数据
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="upDate"></param>
+        /// <returns></returns>
+        Task<ReturnData<T>> UpdatePropertyAsync(Guid id, UpDateModle upDate);
     }
 
 }
