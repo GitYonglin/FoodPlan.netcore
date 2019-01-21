@@ -5,10 +5,11 @@ using MongoDB.Bson.Serialization.IdGenerators;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
+using FoodPlan.Core.Entity;
 
 namespace FoodPlan.DB.Mongo
 {
-    public class MongoContextService
+    public partial class MongoContextService
     {
         private readonly IMongoDatabase _datebase;
         //private delegate void SetBsonClassMap();
@@ -74,7 +75,7 @@ namespace FoodPlan.DB.Mongo
                 cm.MapIdMember(x => x._id).SetIdGenerator(CombGuidGenerator.Instance).SetElementName("id"); // 使用Guid作为文档id
             });
         }
-        // <summary>
+        /// <summary>
         /// 单品文档字段映射
         /// </summary>
         private void CreateIndexSingles<T>() where T: Core.Entity.Single
@@ -85,7 +86,7 @@ namespace FoodPlan.DB.Mongo
                 Unique = true, //name不能重复
             };
             var builder = Builders<T>.IndexKeys;
-            IndexKeysDefinition<T> nameKey = builder.Ascending(d => d.Name);
+            var nameKey = builder.Ascending(d => d.Name);
             var ie = new List<CreateIndexModel<T>>
             {
                 new CreateIndexModel<T>(nameKey, unique),

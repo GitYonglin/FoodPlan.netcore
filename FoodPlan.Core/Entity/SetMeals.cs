@@ -19,6 +19,8 @@ namespace FoodPlan.Core.Entity
         /// 展示图片地址
         /// </summary>
         public string Image { get; set; }
+
+        public decimal Price { get; set; }
         /// <summary>
         /// 剂量
         /// </summary>
@@ -39,39 +41,22 @@ namespace FoodPlan.Core.Entity
         /// 标签
         /// </summary>
         public IEnumerable<string> Tags { get; set; }
-        public Select Select { get; set; }
+        /// <summary>
+        /// 上架
+        /// </summary>
+        public bool Putaway { get; set; }
+        /// <summary>
+        /// 材料
+        /// </summary>
+        public IEnumerable<SelectSingles> Singles { get; set; }
     }
 
-    public class Select
-    {
-        /// <summary>
-        /// 主料
-        /// </summary>
-        public IEnumerable<SelectSingles> Main { get; set; }
-        /// <summary>
-        /// 辅料
-        /// </summary>
-        public IEnumerable<SelectSingles> Assist { get; set; }
-        /// <summary>
-        /// 酱料
-        /// </summary>
-        public IEnumerable<SelectSingles> Sauce { get; set; }
-        /// <summary>
-        /// 使用工具
-        /// </summary>
-        public IEnumerable<SelectSingles> Tools { get; set; }
-        /// <summary>
-        /// 购物用选择状态
-        /// </summary>
-        public bool Check { get; set; }
-        /// <summary>
-        /// 购物用选择数量
-        /// </summary>
-        public int Number { get; set; }
-
-    }
     public class SelectSingles
     {
+        /// <summary>
+        /// 分类
+        /// </summary>
+        public int Category { get; set; }
         /// <summary>
         /// 食材id
         /// </summary>
@@ -79,7 +64,7 @@ namespace FoodPlan.Core.Entity
         /// <summary>
         /// 食材
         /// </summary>
-        public Single Single { get; set; }
+        public SelectSingle Single { get; set; }
         /// <summary>
         /// 食材使用量
         /// </summary>
@@ -92,9 +77,15 @@ namespace FoodPlan.Core.Entity
         /// 自备食材状态
         /// </summary>
         public bool State { get; set; }
-        /// <summary>
-        /// 购物用选择状态
-        /// </summary>
-        public bool Check { get; set; }
     }
+
+    public class SelectSingle
+    {
+        public string Name { get; set; }
+        public decimal Price { get; set; }
+        public int Unit { get; set; }
+        public string UnitName { get; set; }
+        public int Inventory { get; set; }
+    }
+
 }
