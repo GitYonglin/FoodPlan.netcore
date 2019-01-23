@@ -51,4 +51,27 @@ namespace FoodPlan.Core.Entity
         public DateTime Time { get; set; }
         public decimal Price { get; set; }
     }
+
+    public class SingleTables
+    {
+        public Guid _id { get; set; }
+        public string Name { get; set; }
+        public decimal Price { get; set; }
+        /// <summary>
+        /// 上架
+        /// </summary>
+        public bool Putaway { get; set; }
+        /// <summary>
+        /// 库存
+        /// </summary>
+        public int Inventory { get; set; }
+        /// <summary>
+        /// 剂量
+        /// </summary>
+        public int Unit { get; set; }
+        /// <summary>
+        /// 剂量单位
+        /// </summary>
+        public string UnitName { get; set; }
+    }
 }

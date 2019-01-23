@@ -19,7 +19,9 @@ namespace FoodPlan.Core.Entity
         /// 展示图片地址
         /// </summary>
         public string Image { get; set; }
-
+        /// <summary>
+        /// 价格
+        /// </summary>
         public decimal Price { get; set; }
         /// <summary>
         /// 剂量
@@ -81,11 +83,48 @@ namespace FoodPlan.Core.Entity
 
     public class SelectSingle
     {
+        /// <summary>
+        /// 名称
+        /// </summary>
         public string Name { get; set; }
+        /// <summary>
+        /// 价格
+        /// </summary>
         public decimal Price { get; set; }
+        /// <summary>
+        /// 剂量
+        /// </summary>
         public int Unit { get; set; }
+        /// <summary>
+        /// 剂量名
+        /// </summary>
         public string UnitName { get; set; }
+        /// <summary>
+        /// 库存
+        /// </summary>
         public int Inventory { get; set; }
     }
 
+    public class SetMealTables
+    {
+        public Guid _id { get; set; }
+        public string Name { get; set; }
+        public decimal Price { get; set; }
+        /// <summary>
+        /// 上架
+        /// </summary>
+        public bool Putaway { get; set; }
+        /// <summary>
+        /// 库存
+        /// </summary>
+        public int Inventory { get; set; }
+        /// <summary>
+        /// 剂量
+        /// </summary>
+        public int Unit { get; set; }
+        /// <summary>
+        /// 剂量单位
+        /// </summary>
+        public string UnitName { get; set; }
+    }
 }

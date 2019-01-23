@@ -25,5 +25,6 @@ namespace FoodPlan.Core
 
         public string Fields { get; set; }
         public string FieldOk { get; set; }
+        public string Search { get; set; }
     }
 }
